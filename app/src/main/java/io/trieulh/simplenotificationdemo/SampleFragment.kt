@@ -1,5 +1,6 @@
 package io.trieulh.simplenotificationdemo
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import io.trieulh.simplenotificationbar.CustomSimpleNotificationArg
 import io.trieulh.simplenotificationbar.SimpleNotificationArg
 import io.trieulh.simplenotificationbar.SimpleNotificationBar
 import io.trieulh.simplenotificationbar.SimpleNotificationConfig
-import io.trieulh.simplenotificationbar.SimpleNotificationType
-import java.util.*
+import java.util.Random
 
 private const val ARG_NAME = "name"
 
@@ -45,15 +47,30 @@ class SampleFragment : Fragment() {
             setBackgroundColor(color)
 
             setOnClickListener {
-                val intType = (1..3).random()
                 SimpleNotificationBar.bind(this, config = SimpleNotificationConfig(maxCount = 2))
-                    .makeText(
-                        SimpleNotificationArg(
-                            content = System.currentTimeMillis().toString(),
-                            type = SimpleNotificationType.getTypeByInt(intType)
-                        )
-                    ).show()
+                    .makeText(generateRandomNotificationArg()).show()
             }
+        }
+    }
+
+    private fun generateRandomNotificationArg(): SimpleNotificationArg {
+        return when ((0..3).random()) {
+            0 -> SimpleNotificationArg.Custom(
+                content = "Custom: ${System.currentTimeMillis()}",
+                additionalArg = CustomSimpleNotificationArg(
+                    iconDrawable = ContextCompat.getDrawable(
+                        requireContext(),
+                        io.trieulh.simplenotificationbar.R.drawable.ic_error_24
+                    ),
+                    backgroundDrawable = ContextCompat.getDrawable(
+                        requireContext(),
+                        io.trieulh.simplenotificationbar.R.drawable.bg_success
+                    )
+                )
+            )
+            1 -> SimpleNotificationArg.Success(content = System.currentTimeMillis().toString())
+            2 -> SimpleNotificationArg.Error(content = System.currentTimeMillis().toString())
+            else -> SimpleNotificationArg.Warning(content = System.currentTimeMillis().toString())
         }
     }
 

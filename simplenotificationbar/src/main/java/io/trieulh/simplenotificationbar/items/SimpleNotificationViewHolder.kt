@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.trieulh.simplenotificationbar.SimpleNotificationConfig
 
 @SuppressLint("ClickableViewAccessibility")
-internal abstract class SimpleNotificationViewHolder<out SimpleNotificationItem>(
+internal abstract class SimpleNotificationViewHolder<out SimpleNotificationArg>(
     parent: ViewGroup,
     @LayoutRes layoutId: Int,
     private val barConfig: SimpleNotificationConfig
@@ -24,9 +24,9 @@ internal abstract class SimpleNotificationViewHolder<out SimpleNotificationItem>
 
     private var timer: CountDownTimer? = null
 
-    abstract fun bindContent(item: @UnsafeVariance SimpleNotificationItem)
+    abstract fun bindContent(item: @UnsafeVariance io.trieulh.simplenotificationbar.SimpleNotificationArg)
 
-    fun bindItem(item: @UnsafeVariance SimpleNotificationItem) {
+    fun bindItem(item: @UnsafeVariance io.trieulh.simplenotificationbar.SimpleNotificationArg) {
         timer?.cancel()
         timer = object : CountDownTimer(barConfig.duration, 1000) {
             override fun onTick(p0: Long) {
