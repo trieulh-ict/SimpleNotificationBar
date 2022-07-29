@@ -1,6 +1,6 @@
 # SimpleNotificationBar
 
-![Download](https://jitpack.io/v/trieulh-ict/SimpleGenericAdapter.svg)
+![Download](https://jitpack.io/v/trieulh-ict/SimpleNotificationBar.svg)
 
 SimpleNotificationBar is an Android library that helps developers to easily create a Notification inside a view group, instead of system view.
 
