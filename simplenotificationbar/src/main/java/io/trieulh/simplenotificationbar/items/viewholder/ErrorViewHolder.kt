@@ -1,21 +1,20 @@
 package io.trieulh.simplenotificationbar.items.viewholder
 
-import android.annotation.SuppressLint
 import android.view.ViewGroup
 import android.widget.TextView
 import io.trieulh.simplenotificationbar.R
 import io.trieulh.simplenotificationbar.SimpleNotificationConfig
-import io.trieulh.simplenotificationbar.items.SimpleNotificationItem
+import io.trieulh.simplenotificationbar.SimpleNotificationArg
 import io.trieulh.simplenotificationbar.items.SimpleNotificationViewHolder
 
 internal class ErrorViewHolder(parent: ViewGroup, barConfig: SimpleNotificationConfig) :
-    SimpleNotificationViewHolder<SimpleNotificationItem.Error>(
+    SimpleNotificationViewHolder<SimpleNotificationArg.Error>(
         parent,
         R.layout.view_simple_notification_error,
         barConfig
     ) {
-    @SuppressLint("SetTextI18n")
-    override fun bindContent(item: SimpleNotificationItem.Error) {
+    override fun bindContent(item: SimpleNotificationArg) {
+        if (item !is SimpleNotificationArg.Error) return
         itemView.findViewById<TextView>(R.id.txt_content)?.apply {
             text = item.content
         }

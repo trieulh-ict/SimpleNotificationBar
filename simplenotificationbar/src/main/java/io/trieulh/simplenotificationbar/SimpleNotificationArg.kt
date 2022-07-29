@@ -1,30 +1,37 @@
 package io.trieulh.simplenotificationbar
 
-import io.trieulh.simplenotificationbar.items.SimpleNotificationItem
+import android.graphics.drawable.Drawable
 
-/**
- * @property content The displayed String content
- * @property type Type of the Notification View. Currently only support SUCCESS type
- */
-data class SimpleNotificationArg(
-    val content: String = "",
-    val type: SimpleNotificationType = SimpleNotificationType.Success,
+sealed class SimpleNotificationArg(
+    val id: Long = System.currentTimeMillis(),
+    val type: SimpleNotificationType = SimpleNotificationType.Success
 ) {
+    class Success(val itemId: Long? = null, val content: String) : SimpleNotificationArg(
+        id = itemId ?: System.currentTimeMillis(),
+        type = SimpleNotificationType.Success
+    )
 
-    fun buildItem(): SimpleNotificationItem {
-        return when (type) {
-            SimpleNotificationType.Success -> buildSuccessItem()
-            SimpleNotificationType.Error -> buildErrorItem()
-            SimpleNotificationType.Warning -> buildWarningItem()
-        }
-    }
+    class Error(val itemId: Long? = null, val content: String) : SimpleNotificationArg(
+        id = itemId ?: System.currentTimeMillis(),
+        type = SimpleNotificationType.Error
+    )
 
-    private fun buildWarningItem(): SimpleNotificationItem =
-        SimpleNotificationItem.Warning(itemId = System.currentTimeMillis(), content = content)
+    class Warning(val itemId: Long? = null, val content: String) : SimpleNotificationArg(
+        id = itemId ?: System.currentTimeMillis(),
+        type = SimpleNotificationType.Warning
+    )
 
-    private fun buildErrorItem(): SimpleNotificationItem =
-        SimpleNotificationItem.Error(itemId = System.currentTimeMillis(), content = content)
-
-    private fun buildSuccessItem() =
-        SimpleNotificationItem.Success(itemId = System.currentTimeMillis(), content = content)
+    class Custom(
+        val itemId: Long? = null,
+        val content: String,
+        val additionalArg: CustomSimpleNotificationArg
+    ) : SimpleNotificationArg(
+        id = itemId ?: System.currentTimeMillis(),
+        type = SimpleNotificationType.Custom
+    )
 }
+
+data class CustomSimpleNotificationArg(
+    val iconDrawable: Drawable? = null,
+    val backgroundDrawable: Drawable? = null
+)

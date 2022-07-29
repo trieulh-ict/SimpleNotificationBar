@@ -22,7 +22,9 @@ class SimpleNotificationBar @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     // Default argument, you will need to update this for displayed content using makeText() method
-    private var barArg: SimpleNotificationArg = SimpleNotificationArg()
+    private var barArg: SimpleNotificationArg = SimpleNotificationArg.Success(
+        content = ""
+    )
     private var barConfig: SimpleNotificationConfig = SimpleNotificationConfig()
 
     // Notification Adapter
@@ -72,7 +74,7 @@ class SimpleNotificationBar @JvmOverloads constructor(
      */
     fun show() {
         adapter.submitList(adapter.currentList.toMutableList().apply {
-            add(0, barArg.buildItem())
+            add(0, barArg)
         }.take(barConfig.maxCount + 1).toList())
     }
 

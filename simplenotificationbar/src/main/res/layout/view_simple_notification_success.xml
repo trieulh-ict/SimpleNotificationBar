@@ -7,6 +7,7 @@
 
     <!--The root ConstraintLayout will be a dump ViewGroup-->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
