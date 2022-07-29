@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_72">72dp</dimen>
+    <dimen name="card_radius">12dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+</resources>
