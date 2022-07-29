@@ -18,7 +18,7 @@ SimpleNotificationBar is an Android library that helps developers to easily crea
 
 ## Demo
 
-<img src="images/Demo.png" width="30%">
+<img src="images/Demo.png" width="30%"> <img src="images/Demo.gif" width="30%">
 
 ---
 
